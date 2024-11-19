@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-size: 20px;
+  height: 100%;
+  background-color: #000;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+  -webkit-backface-visibility:hidden;
+  -webkit-perspective:1000px;
+  overflow: hidden;
+}
+
+#loadingDialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #f1f1f1;
+  font-size: 1.2rem;
+  text-align: center;
+  background: #000 url("../src/loading.jpg") no-repeat center;
+  background-size: auto 100%;
+  z-index: 1000;
+  #loading-tip {
+    position: absolute;
+    width: 100%;
+    height: 2rem;
+    line-height: 2rem;
+    bottom: 3rem;
+  }
+  #loading-percent {
+    @extend #loading-tip;
+    bottom: 1rem;
+  }
+}
+
+#btnEngine {
+  position: absolute;
+  width: 4.75rem;
+  height: 4.75rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  background: url("../src/start-stop.png") no-repeat;
+  background-size: 4.75rem 4.75rem;
+  z-index: 100;
+}
+
+#btnEnterCar {
+  position: absolute;
+  width: 4.75rem;
+  height: 4.75rem;
+  right: 1.5rem;
+  bottom: 6.5rem;
+  background: url("../src/interior.png") no-repeat center;
+  background-size: 2.4rem 2.4rem;
+  z-index: 100;
+}
+
+#btnLeaveCar {
+  @extend #btnEngine;
+  left: 1.5rem;
+  top: 1.5rem;
+  background: url("../src/quit-interior.png") no-repeat center;
+  background-size: 4.25rem 4.25rem;
+  display: none;
+}
