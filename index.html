@@ -1,26 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>普拉多全景展示</title>
-    <link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #0779e4 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        .main-content {
+            padding: 20px;
+            background: #fff;
+            margin-top: 20px;
+        }
+        .main-content h2 {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <div id="loadingDialog">
-        <p id="loading-tip">loading...</p>
-        <p id="loading-percent">0%</p>
-    </div>
-    <canvas id="3dCanvas" style="background-color: #fff"></canvas>
-    <div id="btnEngine"></div>
-    <div id="btnEnterCar"></div>
-    <div id="btnLeaveCar"></div>
+    <header>
+        <div class="container">
+            <h1>祝林海的个人简历</h1>
+        </div>
+    </header>
+    <div class="container main-content">
+        <h2>关于我</h2>
+        <ul>
+          <li>1.熟练掌握typescript、ant design，以及Angular和基于React的Umi.js框架进行云平台产品研发;</li>
+          <li>2.擅长小程序和H5开发，以及原生iOS开发，并掌握基于Angular生态下的ionic框架进行混合APP应用开发;</li>
+          <li>3.对数据可视化有深入研究，熟悉EChart.js和D3.js进行数据可视化展示，以及基于Three.js进行3D互动场景制作;</li>
+          <li>4.具有全栈开发和Devops方面的专业知识，实践过Node.js、Python等全栈技术栈的解决方案;</li>
+          <li>5.具有较强的问题解决能力，熟练使用Jira、VSTS等工具进行项目进度管理和迭代开发;</li>
+          <li>6.熟悉Azure云平台，包括基于Azure DevOps、Azure Queue、Webjob等产品。</li>
+        </ul>
 
-    <script type="text/javascript" src="js/three.min.js"></script>
-    <script type="text/javascript" src="js/Tween.min.js"></script>
-    <script type="text/javascript" src="js/OrbitControls.js"></script>
-    <script type="text/javascript" src="js/loader/DDSLoader.js"></script>
-    <script type="text/javascript" src="js/loader/MTLLoader.js"></script>
-    <script type="text/javascript" src="js/loader/OBJLoader.js"></script>
-    <script type="text/javascript" src="js/index.js?v=0.0.1"></script>
+        <h2>教育背景</h2>
+        <ul>
+            <li>中国人民大学 - 结业证书+硕士学位 - 管理科学与工程 - 2020.10-2024.06</li>
+            <li>武汉工程大学 - 本科+学士学位 - 计算机科学与技术 - 2009.09-2012.06</li>
+            <li>武汉工程大学 - 专科 - 计算机网络技术 - 2008.09-2011.06</li>
+        </ul>
+
+        <h2>工作经验</h2>
+        <ul>
+            <li>惠每数科(北京)医疗科技有限公司 - 高级前端开发工程师 - 2021.06-2023.01</li>
+            <li>上海蓝云网络科技有限公司 - 高级前端开发工程师 - 2018.05-2021.06</li>
+            <li>北京长智信达信息技术有限公司 - 技术合伙人/前端开发工程师 - 2015.05-2018.04</li>
+            <li>中昊投资湖北集团有限公司 - iOS - 2014.05-2015.04</li>
+            <li>武汉烽火众智数字技术有限责任公司 - C++ - 2013.03-2014.05</li>
+            <li>中国安防技术有限公司 - C++ - 2011.10-2013.03</li>
+        </ul>
+
+        <h2>技能</h2>
+        <ul>
+            <li>编程语言： React, Angular, TypeScript, JavaScript, Python, Node.js, etc.</li>
+            <li>工具：Git, Docker, Jira, Azure, etc.</li>
+        </ul>
+
+        <h2>作品集</h2>
+        <ul>
+          <li>
+            <a href="https://zhulinhai.github.io/case/prado3D/index.html" target="_blank">普拉多3D全景展示</a>
+          </li>
+          <li>
+            <a href="https://zhulinhai.github.io/share/祝林海的案例和作品集.pdf" target="_blank">祝林海的作品集.pdf</a>
+          </li>
+          <li>
+            <a href="https://zhulinhai.github.io/share/前端3D技术分享之Three.pptx" target="_blank">前端3D技术分享之Three.pptx</a>
+          </li>
+        </ul>
+
+        <h2>联系方式</h2>
+        <p>邮箱: <a href="mailto:zhulh128@163.com">zhulh128@163.com</a></p>
+    </div>
 </body>
 </html>
