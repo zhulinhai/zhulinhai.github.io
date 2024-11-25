@@ -1,0 +1,119 @@
+//+------------------------------------------------------------------+
+//|                                                           HFT.mq5  |
+//|                                                                    |
+//|                                                                    |
+//+------------------------------------------------------------------+
+#property copyright "Copyright 2023"
+#property link      ""
+#property version   "1.00"
+#property strict
+
+// 外部参数
+input int LookBackPeriods = 20;     // 回看周期数
+input double Lots = 0.1;            // 交易手数
+input int StopLoss = 100;           // 止损点数
+input int TakeProfit = 200;         // 止盈点数
+
+// 全局变量
+double g_previousHigh;               // 前期高点
+double g_previousLow;                // 前期低点
+int g_lastOrderType = -1;            // 上一个订单类型
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                     |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // 检查输入参数
+    if(LookBackPeriods <= 0) {
+        Print("回看周期数必须大于0");
+        return INIT_FAILED;
+    }
+    
+    return INIT_SUCCEEDED;
+}
+
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                   |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+    
+}
+
+//+------------------------------------------------------------------+
+//| Expert tick function                                               |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // 计算前高前低
+    g_previousHigh = iHigh(NULL, PERIOD_M1, iHighest(NULL, PERIOD_M1, MODE_HIGH, LookBackPeriods, 1));
+    g_previousLow = iLow(NULL, PERIOD_M1, iLowest(NULL, PERIOD_M1, MODE_LOW, LookBackPeriods, 1));
+    
+    // 获取当前价格
+    double currentPrice = iClose(NULL, PERIOD_M1, 0);
+    
+    // 如果没有持仓
+    if(PositionSelect(Symbol()) == false)
+    {
+        // 突破前高做多
+        if(currentPrice > g_previousHigh && g_lastOrderType != ORDER_TYPE_BUY)
+        {
+            OpenOrder(ORDER_TYPE_BUY);
+            g_lastOrderType = ORDER_TYPE_BUY;
+        }
+        // 跌破前低做空
+        else if(currentPrice < g_previousLow && g_lastOrderType != ORDER_TYPE_SELL)
+        {
+            OpenOrder(ORDER_TYPE_SELL);
+            g_lastOrderType = ORDER_TYPE_SELL;
+        }
+    }
+}
+
+//+------------------------------------------------------------------+
+//| 开仓函数                                                           |
+//+------------------------------------------------------------------+
+void OpenOrder(int orderType)
+{
+    double price;
+    double sl;
+    double tp;
+    
+    if(orderType == ORDER_TYPE_BUY)
+    {
+        price = SymbolInfoDouble(Symbol(), SYMBOL_ASK);
+        sl = price - StopLoss * _Point;
+        tp = price + TakeProfit * _Point;
+    }
+    else
+    {
+        price = SymbolInfoDouble(Symbol(), SYMBOL_BID);
+        sl = price + StopLoss * _Point;
+        tp = price - TakeProfit * _Point;
+    }
+    
+    MqlTradeRequest request;
+    MqlTradeResult result;
+    ZeroMemory(request);
+    ZeroMemory(result);
+    
+    request.action = TRADE_ACTION_DEAL;
+    request.symbol = Symbol();
+    request.volume = Lots;
+    request.type = orderType;
+    request.price = price;
+    request.sl = sl;
+    request.tp = tp;
+    request.deviation = 3;
+    request.magic = 0;
+    request.comment = "HFT";
+    
+    if(!OrderSend(request, result))
+    {
+        Print("订单发送失败. 错误码: ", GetLastError());
+    }
+}
+
+
+
